@@ -22,34 +22,40 @@ class UserController {
     }
   }
   async updateInformation(req, res) {
-    const updateData = req.body;
+    const { _id, fullname, address, phone, birthday, gender, avatar } =
+      req.body;
     const user = req.user;
-    if (user.role === "user" && user._id !== updateData._id) {
+    const file = req.file;
+    if (user.role === "user" && user._id !== _id) {
       return res.status(403).json({
         success: false,
         message: "You don't have permission",
       });
     }
     try {
-      const allowedFields = Object.keys(updateData).filter(
-        (field) => field !== "password" && field !== "deleted"
-      );
-      const update = { $set: {} };
-      allowedFields.forEach((field) => {
-        update.$set[field] = updateData[field];
-      });
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: req.body._id },
-        update,
-        { new: true }
-      );
+      const exsistUser = await User.findById(_id);
+      if (!exsistUser) {
+        res.status(404).json({
+          success: false,
+          message: "Không tìm thấy người dùng",
+        });
+      }
+      exsistUser.fullname = fullname;
+      exsistUser.address = address;
+      exsistUser.phone = phone;
+      exsistUser.birthday = birthday;
+      exsistUser.gender = gender;
+      exsistUser.avatar = !!file ? file?.path || "" : avatar;
+      await exsistUser.save();
       res.status(200).json({
         success: true,
         message: "Cập nhật thành công",
-        data: updatedUser,
+        data: {
+          ...exsistUser.toObject(),
+        },
       });
     } catch (error) {
-      res.status(500).json({ error: "Error updating user" });
+      errorHandler(error, res);
     }
   }
 }
