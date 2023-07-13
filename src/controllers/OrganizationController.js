@@ -20,7 +20,7 @@ class OrganizationController {
 
       res.status(201).json({
         success: true,
-        message: "Organization created successfully",
+        message: "Thêm mới thành công",
         data: newOrganization,
       });
     } catch (error) {
@@ -43,10 +43,10 @@ class OrganizationController {
         censored,
         website,
         images,
-        id,
+        _id,
       } = req.body;
 
-      const organization = await Organization.findById(id);
+      const organization = await Organization.findById(_id);
       if (!organization) {
         return res.status(404).json({
           success: false,
@@ -84,7 +84,7 @@ class OrganizationController {
       await organization.save();
       res.json({
         success: true,
-        message: "Organization updated successfully",
+        message: "Cập nhật thành công",
         data: organization,
       });
     } catch (error) {

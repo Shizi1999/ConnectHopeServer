@@ -20,7 +20,7 @@ class PersonController {
       await newPerson.save();
       res.status(201).json({
         success: true,
-        message: "Person created successfully",
+        message: "Thêm mới thành công",
         person: newPerson,
       });
     } catch (error) {
@@ -75,7 +75,7 @@ class PersonController {
       await person.save();
       res.json({
         success: true,
-        message: "Person updated successfully",
+        message: "Cập nhật thành công",
         person,
       });
     } catch (error) {
