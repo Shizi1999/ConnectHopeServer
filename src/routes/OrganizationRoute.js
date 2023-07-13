@@ -22,4 +22,5 @@ router.put(
   OrganizationController.updateOrganization
 );
 router.delete("/delete", OrganizationController.deleteOrganization);
+router.get("/:id", OrganizationController.getById);
 module.exports = router;

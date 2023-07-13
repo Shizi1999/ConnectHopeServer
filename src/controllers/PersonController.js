@@ -113,6 +113,19 @@ class PersonController {
       });
     }
   }
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const person = await Person.findById(id);
+      res.json({
+        success: !!person,
+        message: !!person ? "Thành công" : "Không tìm thấy thông tin",
+        data: person,
+      });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  }
 }
 
 module.exports = new PersonController();

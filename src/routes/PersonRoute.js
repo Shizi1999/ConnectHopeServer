@@ -25,4 +25,5 @@ router.put(
   PersonController.updatePerson
 );
 router.delete("/delete", authMiddleware, PersonController.deleteById);
+router.get("/:id", PersonController.getById);
 module.exports = router;

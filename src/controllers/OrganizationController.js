@@ -121,6 +121,19 @@ class OrganizationController {
       errorHandler(err, res);
     }
   }
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const organization = await Organization.findById(id);
+      res.json({
+        success: !!organization,
+        message: !!organization ? "Thành công" : "Không tìm thấy thông tin",
+        data: organization,
+      });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  }
 }
 
 module.exports = new OrganizationController();
