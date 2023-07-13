@@ -5,15 +5,15 @@ class PersonController {
   async createPerson(req, res) {
     try {
       const user = req.user;
-      const { avatarFile, imageFiles } = req.files;
       // Create a new person
       const newPerson = new Person({
         ...req.body,
-        paymentMethod: JSON.parse(req.body?.paymentMethod) || [],
         author: user._id,
-        avatar: Array.isArray(avatarFile) ? avatarFile.at(0)?.path : "",
-        images: Array.isArray(imageFiles)
-          ? imageFiles.map((file) => file?.path || "")
+        avatar: Array.isArray(req?.files?.avatarFile)
+          ? req?.files?.avatarFile.at(0)?.path
+          : "",
+        images: Array.isArray(req?.files?.imageFiles)
+          ? req?.files?.imageFiles.map((file) => file?.path || "")
           : [],
       });
       // Save the person to the database
@@ -41,7 +41,6 @@ class PersonController {
         zalo,
         description,
         censored,
-        paymentMethod,
         images,
       } = req.body;
       // Find the person by ID
@@ -62,7 +61,6 @@ class PersonController {
       person.phone = phone;
       person.zalo = zalo;
       person.description = description;
-      person.paymentMethod = JSON.parse(paymentMethod) || [];
       person.censored = user.role === "admin" ? censored : false;
       person.images = JSON.parse(images) || [];
       if (files?.imageFiles) {

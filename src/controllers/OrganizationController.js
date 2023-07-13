@@ -5,17 +5,15 @@ class OrganizationController {
   async createOrganization(req, res) {
     try {
       const user = req.user;
-      const { thumbnailFile, imageFiles } = req.files;
       console.log(req.files);
       const newOrganization = new Organization({
         ...req.body,
-        paymentMethod: JSON.parse(req.body.paymentMethod) || [],
         author: user._id,
-        thumbnail: Array.isArray(thumbnailFile)
-          ? thumbnailFile.at(0)?.path
+        thumbnail: Array.isArray(req?.files?.thumbnailFile)
+          ? req?.files?.thumbnailFile.at(0)?.path
           : "",
-        images: Array.isArray(imageFiles)
-          ? imageFiles.map((file) => file?.path || "")
+        images: Array.isArray(req?.files?.imageFiles)
+          ? req?.files?.imageFiles.map((file) => file?.path || "")
           : [],
       });
       await newOrganization.save();
@@ -45,7 +43,6 @@ class OrganizationController {
         censored,
         website,
         images,
-        paymentMethod,
         id,
       } = req.body;
 
@@ -74,7 +71,6 @@ class OrganizationController {
         ? files.thumbnailFile.at(0)?.path
         : thumbnail;
       organization.website = website;
-      organization.paymentMethod = JSON.parse(paymentMethod) || [];
       organization.censored = user.role === "admin" ? censored : false;
       organization.images = JSON.parse(images) || [];
       if (files?.imageFiles) {

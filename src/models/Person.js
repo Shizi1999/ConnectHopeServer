@@ -37,13 +37,6 @@ const personSchema = new mongoose.Schema(
     images: {
       type: [String],
     },
-    paymentMethod: [
-      {
-        name: { type: String },
-        cardNumber: { type: String },
-        cardHolder: { type: String },
-      },
-    ],
   },
   { timestamps: true }
 );

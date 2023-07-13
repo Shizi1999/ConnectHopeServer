@@ -40,13 +40,6 @@ const organizationSchema = new mongoose.Schema(
       type: ObjectId,
       require: true,
     },
-    paymentMethod: [
-      {
-        name: { type: String },
-        cardNumber: { type: String },
-        cardHolder: { type: String },
-      },
-    ],
   },
   { timestamps: true }
 );
