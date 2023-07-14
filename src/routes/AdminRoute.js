@@ -15,5 +15,6 @@ router.patch(
 );
 router.patch("/block-user", AdminController.changeStatusUser);
 router.delete("/delete-user", AdminController.deleteUser);
+router.patch("/change-role", AdminController.changeRole);
 
 module.exports = router;

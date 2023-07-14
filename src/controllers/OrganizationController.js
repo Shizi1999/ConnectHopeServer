@@ -5,7 +5,6 @@ class OrganizationController {
   async createOrganization(req, res) {
     try {
       const user = req.user;
-      console.log(req.files);
       const newOrganization = new Organization({
         ...req.body,
         author: user._id,
@@ -43,6 +42,7 @@ class OrganizationController {
         censored,
         website,
         images,
+        author,
         _id,
       } = req.body;
 
@@ -67,6 +67,7 @@ class OrganizationController {
       organization.zalo = zalo;
       organization.email = email;
       organization.description = description;
+      organization.author = user.role === "user" ? author : user._id;
       organization.thumbnail = Array.isArray(files?.thumbnailFile)
         ? files.thumbnailFile.at(0)?.path
         : thumbnail;

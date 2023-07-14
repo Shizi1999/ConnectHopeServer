@@ -22,7 +22,7 @@ class UserController {
     }
   }
   async updateInformation(req, res) {
-    const { _id, fullname, address, phone, birthday, gender, avatar } =
+    const { _id, fullname, address, phone, birthday, gender, avatar, author } =
       req.body;
     const user = req.user;
     const file = req.file;
@@ -46,6 +46,7 @@ class UserController {
       exsistUser.birthday = birthday;
       exsistUser.gender = gender;
       exsistUser.avatar = !!file ? file?.path || "" : avatar;
+      exsistUser.author = user.role === "user" ? author : user._id;
       await exsistUser.save();
       res.status(200).json({
         success: true,

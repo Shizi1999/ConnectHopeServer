@@ -76,6 +76,7 @@ class AdminController {
       const { _id } = req.body;
       await Person.deleteMany({ author: _id });
       await Organization.deleteMany({ author: _id });
+      await User.deleteOne({ _id });
       res.json({ success: true, message: "Thành công" });
     } catch (error) {
       errorHandler(error, res);
@@ -94,6 +95,17 @@ class AdminController {
     try {
       const data = await Organization.find({ author: req.query.id });
       res.json({ success: true, data });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  }
+  async changeRole(req, res) {
+    try {
+      const data = await User.findOneAndUpdate(
+        { _id: req.body._id },
+        { role: req.body.role }
+      );
+      res.json({ success: true, message: "Thành công", data });
     } catch (error) {
       errorHandler(error, res);
     }
