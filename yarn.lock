@@ -427,12 +427,12 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-express-handlebars@^7.0.7:
-  version "7.0.7"
-  resolved "https://registry.yarnpkg.com/express-handlebars/-/express-handlebars-7.0.7.tgz#78855740bfd636cd0c3d74e44300d7c1172b8440"
-  integrity sha512-O4jUlkEVvqwyhkcmjWOqAEcV3JbcaGnlyS0oSgI3vyXO59Fco5JJtUboU2VHqv3Em3Q0VFC2VhRsmaUeNCOr5Q==
+express-handlebars@7.0.6:
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/express-handlebars/-/express-handlebars-7.0.6.tgz#df4f09bb45387e50a61011860968f131f0940b14"
+  integrity sha512-f1azlphtOp3fp8+dfbcqebQ+tdq9VOXG4TmafJ756n9CjoItW7Mqn3KCZ0BjGdgZ7+ktYHZQWV4oCjiNhSuSeg==
   dependencies:
-    glob "^10.1.0"
+    glob "^10.0.0"
     graceful-fs "^4.2.11"
     handlebars "^4.7.7"
 
@@ -565,7 +565,7 @@ glob-parent@~5.1.2:
   dependencies:
     is-glob "^4.0.1"
 
-glob@^10.1.0:
+glob@^10.0.0:
   version "10.3.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-10.3.3.tgz#8360a4ffdd6ed90df84aa8d52f21f452e86a123b"
   integrity sha512-92vPiMb/iqpmEgsOoIDvTjc50wf9CCCvMzsi6W0JLPeUKE8TWP1a73PgqSrqy7iAZxaSD1YdzU7QZR5LF51MJw==
