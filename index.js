@@ -4,9 +4,9 @@ const path = require("path");
 const connectDB = require("./src/db/ConnectDB");
 const createRoute = require("./src/routes");
 const hbs = require("express-handlebars");
+const dotenv = require("dotenv");
 const envFile = `.env.${process.env.NODE_ENV || "development"}`;
-
-const result = dotenv.config({ path: envFile });
+dotenv.config({ path: envFile });
 
 const app = express();
 // View
