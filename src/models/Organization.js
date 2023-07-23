@@ -21,6 +21,9 @@ const organizationSchema = new mongoose.Schema(
     email: {
       type: String,
     },
+    shortDescription: {
+      type: String,
+    },
     description: {
       type: String,
     },

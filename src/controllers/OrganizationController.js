@@ -43,6 +43,7 @@ class OrganizationController {
         website,
         images,
         author,
+        shortDescription,
         _id,
       } = req.body;
 
@@ -67,6 +68,7 @@ class OrganizationController {
       organization.zalo = zalo;
       organization.email = email;
       organization.description = description;
+      organization.shortDescription = shortDescription;
       organization.author = user.role === "user" ? author : user._id;
       organization.thumbnail = Array.isArray(files?.thumbnailFile)
         ? files.thumbnailFile.at(0)?.path

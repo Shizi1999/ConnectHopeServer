@@ -23,6 +23,9 @@ const personSchema = new mongoose.Schema(
     zalo: {
       type: String,
     },
+    shortDescription: {
+      type: String,
+    },
     description: {
       type: String,
     },

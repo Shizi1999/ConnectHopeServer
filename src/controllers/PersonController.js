@@ -40,6 +40,7 @@ class PersonController {
         phone,
         zalo,
         description,
+        shortDescription,
         censored,
         images,
       } = req.body;
@@ -61,6 +62,7 @@ class PersonController {
       person.phone = phone;
       person.zalo = zalo;
       person.description = description;
+      person.shortDescription = shortDescription;
       person.censored = user.role === "admin" ? censored : false;
       person.images = JSON.parse(images) || [];
       if (files?.imageFiles) {
