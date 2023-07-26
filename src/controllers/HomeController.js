@@ -18,6 +18,14 @@ class HomeController {
       errorHandler(error, res);
     }
   }
+  async getPost(req, res) {
+    const { id } = req.query;
+    let data = await Organization.findById(id);
+    if (!data) {
+      data = await Person.findById(id);
+    }
+    res.json({ success: true, data });
+  }
 }
 
 module.exports = new HomeController();
