@@ -4,8 +4,7 @@ const authMiddlware = require("../middlewares/authMiddleware");
 const cloudinaryUpload = require("../utils/cloudinaryUpload");
 const router = express.Router();
 
-router.get("/person", UserController.getPerson);
-router.get("/organization", UserController.getOrganization);
+router.get("/post", UserController.getPost);
 router.put(
   "/update",
   authMiddlware,

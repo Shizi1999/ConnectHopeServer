@@ -1,19 +1,10 @@
-const Person = require("../models/Person");
-const Organization = require("../models/Organization");
+const Post = require("../models/Post");
 const User = require("../models/User");
 const errorHandler = require("../exceptions/errorHandler");
 class AdminController {
-  async getPerson(_, res) {
+  async getPost(_, res) {
     try {
-      const data = await Person.find();
-      res.json({ success: true, data });
-    } catch (error) {
-      errorHandler(error, res);
-    }
-  }
-  async getOrganization(_, res) {
-    try {
-      const data = await Organization.find();
+      const data = await Post.find();
       res.json({ success: true, data });
     } catch (error) {
       errorHandler(error, res);
@@ -27,33 +18,19 @@ class AdminController {
       errorHandler(error, res);
     }
   }
-  async updatePersonCensored(req, res) {
+  async updatePostCensored(req, res) {
     try {
       const { _id, censored } = req.body;
-      const person = await Person.findOneAndUpdate({ _id }, { censored });
+      const post = await Post.findOneAndUpdate({ _id }, { censored });
       res.json({
-        success: !!person,
-        message: !!person ? "Thành công" : "Không tìm thấy cá nhân này",
+        success: !!post,
+        message: !!post ? "Thành công" : "Không tìm thấy cá nhân này",
       });
     } catch (error) {
       errorHandler(error, res);
     }
   }
-  async updateOrganizationCensored(req, res) {
-    try {
-      const { _id, censored } = req.body;
-      const organization = await Organization.findOneAndUpdate(
-        { _id },
-        { censored }
-      );
-      res.json({
-        success: !!organization,
-        message: !!organization ? "Thành công" : "Không tìm thấy tổ chức này",
-      });
-    } catch (error) {
-      errorHandler(error, res);
-    }
-  }
+
   async changeStatusUser(req, res) {
     try {
       const { _id, deleted } = req.body;
@@ -82,18 +59,9 @@ class AdminController {
       errorHandler(error, res);
     }
   }
-
-  async getPersonByUserId(req, res) {
+  async getPostByUserId(req, res) {
     try {
-      const data = await Person.find({ author: req.query.id });
-      res.json({ success: true, data });
-    } catch (error) {
-      errorHandler(error, res);
-    }
-  }
-  async getOrganizationByUserId(req, res) {
-    try {
-      const data = await Organization.find({ author: req.query.id });
+      const data = await Post.find({ author: req.query.id });
       res.json({ success: true, data });
     } catch (error) {
       errorHandler(error, res);
