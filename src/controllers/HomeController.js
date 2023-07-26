@@ -26,6 +26,14 @@ class HomeController {
     }
     res.json({ success: true, data });
   }
+
+  async search(req, res) {
+    const { searchValue } = req.query;
+    const regex = new RegExp(searchValue, "i");
+    const person = await Person.find({ fullname: regex });
+    const organization = await Organization.find({ name: regex });
+    res.json({ success: true, data: [...person, ...organization] });
+  }
 }
 
 module.exports = new HomeController();
