@@ -24,7 +24,7 @@ class HomeController {
   }
 
   async updateView(req, res) {
-    const { _id } = req.params;
+    const { _id } = req.query;
     try {
       // Find the post by its ID
       const post = await Post.findById(_id);
@@ -33,20 +33,20 @@ class HomeController {
       }
       post.views += 1;
       await post.save();
-      res.json({ success: true, data });
+      res.json({ success: true, data: null });
     } catch (error) {
       errorHandler(error, res);
     }
   }
 
   async getAuthor(req, res) {
-    const { _id } = req.params;
+    const { _id } = req.query;
     try {
       const user = await User.findById(_id);
       if (!user) {
         res.json({ success: false, message: "Không tìm thấy tác giả" });
       }
-      res.json({ success: true, user });
+      res.json({ success: true, data: user });
     } catch (error) {
       errorHandler(error, res);
     }
