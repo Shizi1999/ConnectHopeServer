@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const User = require("../models/User");
 const errorHandler = require("../exceptions/errorHandler");
 class HomeController {
   async getPosts(_, res) {
@@ -20,6 +21,35 @@ class HomeController {
     const regex = new RegExp(searchValue, "i");
     const data = await Post.find({ title: regex });
     res.json({ success: true, data });
+  }
+
+  async updateView(req, res) {
+    const { _id } = req.params;
+    try {
+      // Find the post by its ID
+      const post = await Post.findById(_id);
+      if (!post) {
+        res.json({ success: false, message: "Không tìm thấy bài viết" });
+      }
+      post.views += 1;
+      await post.save();
+      res.json({ success: true, data });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  }
+
+  async getAuthor(req, res) {
+    const { _id } = req.params;
+    try {
+      const user = await User.findById(_id);
+      if (!user) {
+        res.json({ success: false, message: "Không tìm thấy tác giả" });
+      }
+      res.json({ success: true, user });
+    } catch (error) {
+      errorHandler(error, res);
+    }
   }
 }
 
