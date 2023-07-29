@@ -4,8 +4,12 @@
   "description": "This is a community project made by Fpt Polytechnic college students. The project has a mission to bring people closer together.",
   "main": "index.js",
   "author": "Group6 - DM17314",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
