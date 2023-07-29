@@ -14,5 +14,8 @@ function createRoute(app) {
   app.use("/api/user", authMiddleware, userRoute);
   app.use("/api/admin", authMiddleware, adminMiddleware, adminRoute);
   app.use("/api/public", homeRoute);
+  app.use("/", (req, res, next) => {
+    req.json("Hello Shizi");
+  });
 }
 module.exports = createRoute;
