@@ -79,7 +79,7 @@ class PostController {
           data: undefined,
         });
       }
-      if (user.role === "user" && post.author !== user._id) {
+      if (user.role === "user" && post.author.toString() !== user._id) {
         return res.status(403).json({
           success: false,
           message: "Bạn không có quyền xóa tổ chức này",
