@@ -21,9 +21,7 @@ class AdminController {
   async updatePostCensored(req, res) {
     try {
       const { _id, censored } = req.body;
-      // const post = await Post.findOneAndUpdate({ _id }, { censored });
-      const post = await Post.findOne({ _id });
-      console.log(post);
+      const post = await Post.findOneAndUpdate({ _id }, { censored });
       res.json({
         success: !!post,
         message: !!post ? "Thành công" : "Không tìm thấy cá nhân này",
