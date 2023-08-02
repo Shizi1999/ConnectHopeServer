@@ -16,9 +16,11 @@ const jwtOptions = {
 passport.use(
   new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
     try {
-      // Find the user based on the JWT payload
-      const user = await User.findById(jwtPayload.userId);
+      let user = await User.findById(jwtPayload.userId);
       if (user) {
+        let newId = user._id.toString()
+        user = user.toObject()
+        user._id = newId
         return done(null, user);
       } else {
         return done(null, false);
@@ -43,7 +45,6 @@ function authMiddleware(req, res, next) {
         message: "Your account has been blocked",
       });
     }
-    // Set the user object to the request
     req.user = user;
     next();
   })(req, res, next);

@@ -15,7 +15,7 @@ class UserController {
   async updateInformation(req, res) {
     const { _id, fullname, address, phone, birthday, gender, avatar, author } =
       req.body;
-    const user = req.user;
+    let user = req.user;
     const file = req.file;
     if (user.role === "user" && user._id !== _id) {
       return res.status(403).json({
