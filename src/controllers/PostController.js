@@ -109,6 +109,11 @@ class PostController {
       errorHandler(error, res);
     }
   }
+  async getData(req, res) {
+
+  }
 }
+
+
 
 module.exports = new PostController();

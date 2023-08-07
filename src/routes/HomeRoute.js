@@ -7,5 +7,6 @@ router.get("/posts", HomeController.getPosts);
 router.get("/search", HomeController.search);
 router.get("/post-view", HomeController.updateView);
 router.get("/author", HomeController.getAuthor);
+router.post("/change-author", HomeController.changeAuthor)
 
 module.exports = router;

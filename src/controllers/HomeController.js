@@ -51,6 +51,29 @@ class HomeController {
       errorHandler(error, res);
     }
   }
+
+  async changeAuthor(req, res) {
+    const { postId, authorId } = req.body
+    if (!postId || !authorId) {
+      res.status(500).json({ success: false, message: "Du lieu khong hop le" })
+    }
+    try {
+      const user = await User.findById(authorId);
+      if (!user) {
+        res.status(500).json({ success: false, message: "Khong tim thay nguoi dung" })
+      }
+      const post = await Post.findById(postId);
+      if (!post) {
+        res.status(500).json({ success: false, message: "Khong tim thay bai viet" })
+      } else {
+        post.author = authorId
+        await post.save()
+        res.json({ success: true, message: "Success" })
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Server Interval" })
+    }
+  }
 }
 
 module.exports = new HomeController();
